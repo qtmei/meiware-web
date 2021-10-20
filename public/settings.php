@@ -41,8 +41,15 @@
 			$sta = $con->prepare("UPDATE profiles SET profilename=:profilename WHERE uid=:uid");
 			$sta->execute(array(':profilename' => $newprofilename, ':uid' => $_SESSION["uid"]));
 
-			$sta = $con->prepare("UPDATE profiles SET avatar=:avatar WHERE uid=:uid");
-			$sta->execute(array(':avatar' => $newavatar, ':uid' => $_SESSION["uid"]));
+			$headers = get_headers($newavatar, 1);
+			if(isset($headers["Content-Type"]))
+			{
+				if(strpos($headers["Content-Type"], "image/") !== FALSE)
+				{
+					$sta = $con->prepare("UPDATE profiles SET avatar=:avatar WHERE uid=:uid");
+					$sta->execute(array(':avatar' => $newavatar, ':uid' => $_SESSION["uid"]));
+				}
+			}
 
 			$sta = $con->prepare("UPDATE profiles SET info=:info WHERE uid=:uid");
 			$sta->execute(array(':info' => $newinfo, ':uid' => $_SESSION["uid"]));
