@@ -87,7 +87,7 @@
 							<table>
 								<tr><td><img src="' . $profileinfo["avatar"] . '" style="width: 16vh; height: 16vh; object-fit: cover;"></td></tr>
 
-								<tr><td><a href="profile.php?uid=' . $accountinfo["uid"] . '">' . $profileinfo["profilename"] . ' <img src="core/flags/' . $accountinfo["country"] . '.png"></a></td></tr>
+								<tr><td><a href="profile.php?uid=' . $accountinfo["uid"] . '">' . $profileinfo["profilename"] . ' <img src="core/flags/' . $accountinfo["country"] . '.png" style="height: 1.5vh;"></a></td></tr>
 
 								' . $title . '
 
