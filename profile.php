@@ -36,7 +36,7 @@
 			<table>
 				<tr><td><img src="<?php echo $profileinfo["avatar"]; ?>" style="width: 16vh; height: 16vh; object-fit: cover;"></td></tr>
 
-				<tr><td><a href="profile.php?uid=<?php echo $_GET["uid"]; ?>"><?php echo $profileinfo["profilename"]; ?> <img src="core/flags/<?php echo $accountinfo["country"]; ?>.png"></a></td></tr>
+				<tr><td><a href="profile.php?uid=<?php echo $_GET["uid"]; ?>"><?php echo $profileinfo["profilename"]; ?> <img src="core/flags/<?php echo $accountinfo["country"]; ?>.png" style="height: 1.5vh;"></a></td></tr>
 
 				<?php if($accountinfo["title"] != "") { echo "<tr><td>" . $accountinfo["title"] . "</tr></td>"; } ?>
 
