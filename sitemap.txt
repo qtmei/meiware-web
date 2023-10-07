@@ -1,4 +1,4 @@
-https://mayware.net/index.php
-https://mayware.net/users.php
-https://mayware.net/login.php
-https://mayware.net/register.php
+https://meiware.net/index.php
+https://meiware.net/users.php
+https://meiware.net/login.php
+https://meiware.net/register.php
