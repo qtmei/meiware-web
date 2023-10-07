@@ -1,0 +1,4 @@
+https://mayware.net/index.php
+https://mayware.net/users.php
+https://mayware.net/login.php
+https://mayware.net/register.php
