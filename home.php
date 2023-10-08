@@ -26,8 +26,8 @@
 			<div id="spacer"></div>
 
 			Meiware is an impossible to detect CS2 cheat that reads memory outside of a hypervisor running CS2.</br>
-			It simulates key press and does not write memory.</br>
-			All graphical components are drawn outside of the hypervisor on top, so it is streaming compatible.</br>
+			it simulates key press and does not write memory.</br>
+			all graphical components are drawn outside of the hypervisor on top, so it is streaming compatible.</br>
 			features include:</br>
 			triggerbot</br>
 			ESP(name, health)</br>
