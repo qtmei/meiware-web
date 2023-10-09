@@ -11,6 +11,10 @@
 		$sta->execute(array(':uid' => $_SESSION["uid"]));
 		$profileinfo = $sta->fetch();
 
+		$sta = $con->prepare("SELECT code FROM invites WHERE uid=:uid");
+		$sta->execute(array(':uid' => $_SESSION["uid"]));
+		$inviteinfo = $sta->fetch();
+
 		if($_POST)
 		{
 			$newusername = htmlspecialchars(substr(strtolower($_POST["username"]), 0, 16));
@@ -98,9 +102,12 @@
 
 							<div id="spacer"></div>
 
-							<form method="POST">
-								<b>update</b><br>
+							invite code<br>
+							<input type="text" name="invitecode" maxlength="16" value="' . $inviteinfo["code"] . '" readonly>
 
+							<div id="spacer"></div>
+
+							<form method="POST">
 								username<br>
 								<input type="text" name="username" maxlength="16" value="' . $accountinfo["username"] . '">
 

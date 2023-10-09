@@ -6,18 +6,26 @@
 		$username = htmlspecialchars(substr(strtolower($_POST["username"]), 0, 16));
 		$password = substr($_POST["password"], 0, 256);
 		$passwordconfirm = substr($_POST["passwordconfirm"], 0, 256);
+		$invitecode = substr($_POST["invitecode"], 0, 16);
 
 		$sta = $con->prepare("SELECT username FROM accounts WHERE username=:username");
 		$sta->execute(array(':username' => $username));
 		$usernameres = $sta->rowCount();
 
-		if($usernameres == 0 && $password == $passwordconfirm)
+		$sta = $con->prepare("SELECT code FROM invites WHERE code=:code");
+		$sta->execute(array(':code' => $invitecode));
+		$invitecoderes = $sta->rowCount();
+
+		if($usernameres == 0 && $password == $passwordconfirm && $invitecoderes == 1)
 		{
 			$sta = $con->prepare("INSERT INTO accounts (username, password, country) VALUES (:username, :password, :country)");
 			$sta->execute(array(':username' => $username, ':password' => password_hash($password, PASSWORD_DEFAULT), ':country' => file_get_contents("http://ipinfo.io/" . getIP() . "/country")));
 
 			$sta = $con->prepare("INSERT INTO profiles (profilename, avatar, info) VALUES (:username, 'core/meiware.png', '')");
 			$sta->execute(array(':username' => $username));
+
+			$sta = $con->prepare("DELETE FROM invites WHERE code=:code");
+			$sta->execute(array(':code' => $invitecode));
 
 			header("Location: login.php");
 			die();
@@ -61,6 +69,11 @@
 
 				confirm password<br>
 				<input type="password" name="passwordconfirm" maxlength="256">
+
+				<div id="spacer"></div>
+
+				invite code<br>
+				<input type="password" name="invitecode" maxlength="256">
 
 				<div id="spacer"></div>
 
