@@ -68,12 +68,12 @@
 				<html>
 					<head>
 						<title>settings</title>
-						<link rel="icon" href="core/meiware.png?ts=' . time() . '">
-						<link rel="stylesheet" href="core/stylesheet.css?ts=' . time() . '">
+						<link rel="icon" href="core/meiware.png">
+						<link rel="stylesheet" href="core/stylesheet.css">
 					</head>
 
 					<header>
-						<a href="index.php"><img src="core/meiware.png?ts=' . time() . '" style="width: 8vh; height: 8vh; line-height: 10vh;">eiware</a>
+						<a href="index.php"><img src="core/meiware.png" style="width: 8vh; height: 8vh; line-height: 10vh;">eiware</a>
 					</header>
 
 					<div id="spacer"></div>

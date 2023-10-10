@@ -5,12 +5,12 @@
 <html>
 	<head>
 		<title>home</title>
-		<link rel="icon" href="core/meiware.png?ts=<?php echo time(); ?>">
-		<link rel="stylesheet" href="core/stylesheet.css?ts=<?php echo time(); ?>">
+		<link rel="icon" href="core/meiware.png">
+		<link rel="stylesheet" href="core/stylesheet.css">
 	</head>
 
 	<header>
-		<a href="index.php"><img src="core/meiware.png?ts=<?php echo time(); ?>" style="width: 8vh; height: 8vh; line-height: 10vh;">eiware</a>
+		<a href="index.php"><img src="core/meiware.png" style="width: 8vh; height: 8vh; line-height: 10vh;">eiware</a>
 	</header>
 
 	<div id="spacer"></div>
@@ -28,11 +28,9 @@
 			Meiware is an impossible to detect CS2 cheat that reads memory outside of a hypervisor running CS2.<br>
 			it simulates key press and does not write memory.<br>
 			all graphical components are drawn outside of the hypervisor on top, so it is streaming compatible.<br>
-			features include:<br>
-			triggerbot<br>
-			ESP(name, health)<br>
-			chams(green visible, red invisible)<br>
-			bhop
+			features: triggerbot, ESP, chams, bhop<br>
+
+			<img src="core/screenshot.png" style="width: 75vw;">
 
 			<div id="spacer"></div>
 		</div>
