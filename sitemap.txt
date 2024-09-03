@@ -1,5 +1,5 @@
-https://meiware.net/index.php
-https://meiware.net/home.php
-https://meiware.net/users.php
-https://meiware.net/login.php
-https://meiware.net/register.php
+https://meiware.net/
+https://meiware.net/index
+https://meiware.net/users
+https://meiware.net/login
+https://meiware.net/register

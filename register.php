@@ -1,8 +1,7 @@
 <?php
 	include "core/functions.php";
 
-	if($_POST)
-	{
+	if($_POST) {
 		$username = htmlspecialchars(substr(strtolower($_POST["username"]), 0, 16));
 		$password = substr($_POST["password"], 0, 256);
 		$passwordconfirm = substr($_POST["passwordconfirm"], 0, 256);
@@ -16,8 +15,7 @@
 		$sta->execute(array(':code' => $invitecode));
 		$invitecoderes = $sta->rowCount();
 
-		if($usernameres == 0 && $password == $passwordconfirm && $invitecoderes == 1)
-		{
+		if($usernameres == 0 && $password == $passwordconfirm && $invitecoderes == 1) {
 			$sta = $con->prepare("INSERT INTO accounts (username, password, country) VALUES (:username, :password, :country)");
 			$sta->execute(array(':username' => $username, ':password' => password_hash($password, PASSWORD_DEFAULT), ':country' => file_get_contents("http://ipinfo.io/" . getIP() . "/country")));
 
@@ -28,7 +26,7 @@
 			$sta->execute(array(':code' => $invitecode));
 
 			header("Location: login.php");
-			die();
+			exit();
 		}
 	}
 ?>
@@ -41,13 +39,13 @@
 	</head>
 
 	<header>
-		<a href="index.php"><img src="core/meiware.png" style="width: 8vh; height: 8vh; line-height: 10vh;">eiware</a>
+		<a href="/"><img src="core/meiware.png" style="width: 8vh; height: 8vh; line-height: 10vh;">eiware</a>
 	</header>
 
 	<div id="spacer"></div>
 
 	<nav>
-		<a href="home.php">home</a><a href="users.php">users</a>[<a href="login.php">login</a>/<a href="register.php">register</a>]
+		<a href="/">home</a><a href="users.php">users</a>[<a href="login.php">login</a>/<a href="register.php">register</a>]
 	</nav>
 
 	<div id="spacer"></div>

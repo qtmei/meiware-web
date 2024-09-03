@@ -10,13 +10,13 @@
 	</head>
 
 	<header>
-		<a href="index.php"><img src="core/meiware.png" style="width: 8vh; height: 8vh; line-height: 10vh;">eiware</a>
+		<a href="/"><img src="core/meiware.png" style="width: 8vh; height: 8vh; line-height: 10vh;">eiware</a>
 	</header>
 
 	<div id="spacer"></div>
 
 	<nav>
-		<a href="home.php">home</a><a href="users.php">users</a><?php echo (IsValidSession()) ? '<a href="settings.php">settings</a><a href="logout.php">logout</a>' : '[<a href="login.php">login</a>/<a href="register.php">register</a>]'; ?>
+		<a href="/">home</a><a href="users.php">users</a><?php echo (IsValidSession()) ? '<a href="settings.php">settings</a><a href="logout.php">logout</a>' : '[<a href="login.php">login</a>/<a href="register.php">register</a>]'; ?>
 	</nav>
 
 	<div id="spacer"></div>
@@ -30,8 +30,7 @@
 					$sta = $con->prepare("SELECT * FROM profiles");
 					$sta->execute();
 
-					while($row = $sta->fetch())
-					{
+					while($row = $sta->fetch()) {
 						echo '<tr><td><a href="profile.php?uid=' . $row["uid"] . '">' . $row["profilename"] . '</a></td></tr>';
  					}
 				?>

@@ -1,8 +1,7 @@
 <?php
 	include "core/functions.php";
 
-	if(IsValidSession())
-	{
+	if(IsValidSession()) {
 		$sta = $con->prepare("SELECT * FROM accounts WHERE uid=:uid");
 		$sta->execute(array(':uid' => $_SESSION["uid"]));
 		$accountinfo = $sta->fetch();
@@ -15,8 +14,7 @@
 		$sta->execute(array(':uid' => $_SESSION["uid"]));
 		$inviteinfo = $sta->fetch();
 
-		if($_POST)
-		{
+		if($_POST) {
 			$newusername = htmlspecialchars(substr(strtolower($_POST["username"]), 0, 16));
 			$newpassword = substr($_POST["password"], 0, 256);
 			$newprofilename = htmlspecialchars(substr($_POST["profilename"], 0, 16));
@@ -26,40 +24,25 @@
 			$sta = $con->prepare("SELECT username FROM accounts WHERE username=:username");
 			$sta->execute(array(':username' => $newusername));
 			$usernameres = $sta->rowCount();
-			if($newusername != $accountinfo["username"] && $usernameres == 0)
-			{
+			if($newusername != $accountinfo["username"] && $usernameres == 0) {
 				$sta = $con->prepare("UPDATE accounts SET username=:username WHERE uid=:uid");
 				$sta->execute(array(':username' => $newusername, ':uid' => $_SESSION["uid"]));
 
 				$_SESSION["username"] = $newusername;
 			}
 
-			if($newpassword != $accountinfo["password"] && password_verify($newpassword, $accountinfo["password"]) == 0)
-			{
+			if($newpassword != $accountinfo["password"] && password_verify($newpassword, $accountinfo["password"]) == 0) {
 				$sta = $con->prepare("UPDATE accounts SET password=:password WHERE uid=:uid");
 				$sta->execute(array(':password' => password_hash($newpassword, PASSWORD_DEFAULT), ':uid' => $_SESSION["uid"]));
 
 				$_SESSION["password"] = $newpassword;
 			}
 
-			$sta = $con->prepare("UPDATE profiles SET profilename=:profilename WHERE uid=:uid");
-			$sta->execute(array(':profilename' => $newprofilename, ':uid' => $_SESSION["uid"]));
-
-			$headers = get_headers($newavatar, 1);
-			if(isset($headers["Content-Type"]))
-			{
-				if(strpos($headers["Content-Type"], "image/") !== FALSE)
-				{
-					$sta = $con->prepare("UPDATE profiles SET avatar=:avatar WHERE uid=:uid");
-					$sta->execute(array(':avatar' => $newavatar, ':uid' => $_SESSION["uid"]));
-				}
-			}
-
-			$sta = $con->prepare("UPDATE profiles SET info=:info WHERE uid=:uid");
-			$sta->execute(array(':info' => $newinfo, ':uid' => $_SESSION["uid"]));
+			$sta = $con->prepare("UPDATE profiles SET profilename=:profilename, avatar=:avatar, info=:info WHERE uid=:uid");
+			$sta->execute(array(':profilename' => $newprofilename, ':avatar' => $newavatar, ':info' => $newinfo, ':uid' => $_SESSION["uid"]));
 
 			header("Location: " . $_SERVER["REQUEST_URI"]);
-			die();
+			exit();
 		}
 
 		$title = $accountinfo["title"] == "" ? "" : "<tr><td>" . $accountinfo["title"] . "</tr></td>";
@@ -73,13 +56,13 @@
 					</head>
 
 					<header>
-						<a href="index.php"><img src="core/meiware.png" style="width: 8vh; height: 8vh; line-height: 10vh;">eiware</a>
+						<a href="/"><img src="core/meiware.png" style="width: 8vh; height: 8vh; line-height: 10vh;">eiware</a>
 					</header>
 
 					<div id="spacer"></div>
 
 					<nav>
-						<a href="home.php">home</a><a href="users.php">users</a><a href="settings.php">settings</a><a href="logout.php">logout</a>
+						<a href="/">home</a><a href="users.php">users</a><a href="settings.php">settings</a><a href="logout.php">logout</a>
 					</nav>
 
 					<div id="spacer"></div>

@@ -3,6 +3,6 @@
 
 	session_unset();
 	session_destroy();
-	header("Location: $mainpage");
-	die();
+	header("Location: http://" . $_SERVER["HTTP_HOST"] . "/");
+	exit();
 ?>
