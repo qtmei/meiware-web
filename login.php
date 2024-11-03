@@ -1,25 +1,31 @@
-<?php
+<?
 	include "core/functions.php";
 
-	if($_POST) {
+	if($_POST)
+	{
 		$username = substr(strtolower($_POST["username"]), 0, 16);
 		$password = substr($_POST["password"], 0, 256);
 
 		$sta = $con->prepare("SELECT password FROM accounts WHERE username=:username");
 		$sta->execute(array(':username' => $username));
-		$fetchedpassword = $sta->fetch()["password"];
+		$fetchedPassword = $sta->fetch()["password"];
 
-		if(password_verify($password, $fetchedpassword)) {
-			$sta = $con->prepare("SELECT uid FROM accounts WHERE username=:username");
+		if(password_verify($password, $fetchedPassword))
+		{
+			$sta = $con->prepare("SELECT id FROM accounts WHERE username=:username");
 			$sta->execute(array(':username' => $username));
-			$uid = $sta->fetch()["uid"];
+			$id = $sta->fetch()["id"];
 
-			$_SESSION["uid"] = $uid;
+			$_SESSION["id"] = $id;
 			$_SESSION["username"] = $username;
-			$_SESSION["password"] = $fetchedpassword;
+			$_SESSION["password"] = $fetchedPassword;
 
-			header("Location: http://" . $_SERVER["HTTP_HOST"] . "/");
+			header("Location: http://" . $_SERVER["HTTP_HOST"] . "/tickets.php");
 			exit();
+		}
+		else
+		{
+			echo "Wrong password.";
 		}
 	}
 ?>
@@ -27,47 +33,28 @@
 <html>
 	<head>
 		<title>login</title>
-		<link rel="icon" href="core/meiware.png">
+		<link rel="icon" href="core/logo.png">
 		<link rel="stylesheet" href="core/stylesheet.css">
 	</head>
 
 	<header>
-		<a href="/"><img src="core/meiware.png" style="width: 8vh; height: 8vh; line-height: 10vh;">eiware</a>
+		<img src="core/logo.png" style="width: 6vh; height: 6vh;"><? echo substr($domain, 1); ?><a href="/">home</a><a href="contact.php">contact us</a><a href="login.php">login</a>
 	</header>
-
-	<div id="spacer"></div>
-
-	<nav>
-		<a href="/">home</a><a href="users.php">users</a>[<a href="login.php">login</a>/<a href="register.php">register</a>]
-	</nav>
-
-	<div id="spacer"></div>
 
 	<body>
 		<div id="content">
-			<div id="spacer"></div>
-
 			<form method="POST">
 				username<br>
-				<input type="text" name="username" maxlength="16">
-
-				<div id="spacer"></div>
-
+				<input type="text" name="username" maxlength="16" required><br>
 				password<br>
-				<input type="password" name="password" maxlength="256">
-
-				<div id="spacer"></div>
-
+				<input type="password" name="password" maxlength="256" required><br>
+				<br>
 				<input type="submit" value="login">
 			</form>
-
-			<div id="spacer"></div>
 		</div>
 	</body>
 
-	<div id="spacer"></div>
-
 	<footer>
-		&copy; <?php echo date("Y") . " Meiware"; ?>
+		&copy; <? echo date("Y") . " " . $domain; ?>
 	</footer>
 </html>
